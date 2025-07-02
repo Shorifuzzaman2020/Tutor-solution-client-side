@@ -3,6 +3,7 @@ import {
 } from "react-router";
 import MainLayout from "../Layout/MainLayout";
 import Home from "../components/Home";
+import AddTutorials from "../pages/AddTutorials";
 
 const router = createBrowserRouter([
   {
@@ -12,6 +13,10 @@ const router = createBrowserRouter([
         {
             index: true,
             element: <Home/>,
+        },
+        {
+          path: 'add-tutorials',
+          element: <AddTutorials/>,
         }
     ]
   },
