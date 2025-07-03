@@ -9,6 +9,7 @@ import MyTutorials from "../pages/MyTutorials";
 import MyBookedTutors from "../pages/MyBookedTutors";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import EditTutorial from "../pages/EditTutorial";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
           path: 'register',
           element: <Register/>,
         },
+        {
+          path: 'edit-tutorial/:id',
+          element: <EditTutorial/>,
+        }
     ]
   },
 ]);
