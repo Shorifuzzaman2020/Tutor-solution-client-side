@@ -1,4 +1,5 @@
 
+
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
@@ -6,9 +7,7 @@ import { auth, googleProvider } from "../firebase.init";
 import { useUser } from "../UserContext";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
-
 const Login = () => {
-  
   const navigate = useNavigate();
   const { setUser, setIsLoggedIn } = useUser();
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -26,7 +25,11 @@ const Login = () => {
       const user = userCredential.user;
       setUser(user);
       setIsLoggedIn(true);
-      navigate("/profile");
+
+      
+      await saveUserToDatabase(user);
+
+      navigate("/my-recipes");
     } catch (err) {
       setError("Invalid email or password.");
     }
@@ -38,9 +41,41 @@ const Login = () => {
       const user = userCredential.user;
       setUser(user);
       setIsLoggedIn(true);
-      navigate("/profile");
+
+      
+      await saveUserToDatabase(user);
+
+      navigate("/my-recipes");
     } catch (err) {
       setError("Google login failed.");
+    }
+  };
+
+  const saveUserToDatabase = async (user) => {
+    try {
+      const userData = {
+        uid: user.uid,
+        displayName: user.displayName,
+        email: user.email,
+        photoURL: user.photoURL,
+      };
+
+      
+      const response = await fetch("http://localhost:3000/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to save user data.");
+      }
+
+      console.log("User data saved to MongoDB.");
+    } catch (error) {
+      console.error("Error saving user data:", error);
     }
   };
 

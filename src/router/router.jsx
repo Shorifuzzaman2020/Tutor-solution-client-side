@@ -4,6 +4,11 @@ import {
 import MainLayout from "../Layout/MainLayout";
 import Home from "../components/Home";
 import AddTutorials from "../pages/AddTutorials";
+import FindTutors from "../pages/FindTutors";
+import MyTutorials from "../pages/MyTutorials";
+import MyBookedTutors from "../pages/MyBookedTutors";
+import Login from "../pages/Login";
+import Register from "../pages/Register";
 
 const router = createBrowserRouter([
   {
@@ -17,7 +22,27 @@ const router = createBrowserRouter([
         {
           path: 'add-tutorials',
           element: <AddTutorials/>,
-        }
+        },
+        {
+          path: 'find-tutors',
+          element: <FindTutors/>,
+        },
+        {
+          path: 'my-tutorials',
+          element: <MyTutorials/>,
+        },
+        {
+          path: 'my-booked-tutors',
+          element: <MyBookedTutors/>,
+        },
+        {
+          path: 'login',
+          element: <Login/>,
+        },
+        {
+          path: 'register',
+          element: <Register/>,
+        },
     ]
   },
 ]);
