@@ -10,21 +10,21 @@ const MyTutorialsCard = ({ tutorial, onDelete }) => {
   const navigate = useNavigate();
   const [isOwner] = useState(user && user.uid === tutorial.userId);
 
-  const handleLike = () => {
+  const handleReview = () => {
     if (user && tutorial.userId !== user.uid) {
       const updatedTutorial = {
         ...tutorial,
-        likeCount: (tutorial.likeCount || 0) + 1,
+        ReviewCount: (tutorial.review || 0) + 1,
       };
 
       fetch(`http://localhost:3000/tutorials/${tutorial._id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ likeCount: updatedTutorial.likeCount }),
+        body: JSON.stringify({ ReviewCount: updatedTutorial.ReviewCount }),
       })
         .then((res) => res.json())
         .then(() => {
-          tutorial.likeCount = updatedTutorial.likeCount;
+          tutorial.ReviewCount = updatedTutorial.ReviewCount;
         })
         .catch((err) => {
           Swal.fire('Error!', err.message || 'Something went wrong.', 'error');
@@ -101,7 +101,7 @@ const MyTutorialsCard = ({ tutorial, onDelete }) => {
               <AiOutlineDelete size={20} />
             </button>
             <button
-              onClick={handleLike}
+              onClick={handleReview}
               disabled={tutorial.userId === user?.uid}
               className={`${
                 tutorial.userId === user?.uid
