@@ -11,6 +11,8 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import EditTutorial from "../pages/EditTutorial";
 import TutorDetails from "../pages/TutorDetails";
+import LanguageCategorySection from "../pages/LanguageCategorySection";
+import FindTutorsByCategory from "../pages/FindTutorsByCategory";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +54,14 @@ const router = createBrowserRouter([
         {
           path: '/tutor/:id',
           element: <TutorDetails/>,
+        },
+        {
+          path: 'categories',
+          element: <LanguageCategorySection/>,
+        },
+        {
+          path: 'find-tutors/:category',
+          element: <FindTutorsByCategory/>,
         },
     ]
   },
