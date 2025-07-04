@@ -5,7 +5,7 @@ import { useUser } from "../UserContext";
 import { auth } from "../firebase.init";
 import { FaBars, FaTimes } from "react-icons/fa";
 
-const Navbar = () => {
+const Navbar = ({ toggleTheme, theme }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { user, setUser } = useUser();
@@ -77,7 +77,17 @@ const Navbar = () => {
         {/* Desktop Auth */}
         <div className="hidden lg:flex items-center space-x-4">
           {user ? (
+
             <div className="flex items-center space-x-2">
+              <div>
+                <button
+                  onClick={toggleTheme}
+                  className="bg-white text-black px-3 py-1 rounded hover:bg-gray-300 text-sm"
+                >
+                  {theme === 'dark' ? '🌙 Dark' : '☀️ Light'}
+                </button>
+
+              </div>
               <img
                 src={user.photoURL || "https://www.gravatar.com/avatar/"}
                 alt={user.displayName}
@@ -92,12 +102,22 @@ const Navbar = () => {
               </button>
             </div>
           ) : (
-            <Link
-              to="/login"
-              className="bg-white text-black p-2 rounded hover:bg-blue-700"
-            >
-              Login
-            </Link>
+            <>
+              <button
+                onClick={toggleTheme}
+                className="bg-white text-black px-3 py-1 rounded hover:bg-gray-300 text-sm"
+              >
+                {theme === 'dark' ? '🌙 Dark' : '☀️ Light'}
+              </button>
+
+              <Link
+                to="/login"
+                className="bg-white text-black p-2 rounded hover:bg-blue-700"
+              >
+                Login
+              </Link>
+            </>
+
           )}
         </div>
 

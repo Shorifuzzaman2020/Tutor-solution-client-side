@@ -1,9 +1,10 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 const FindTutorsByCategory = () => {
   const { category } = useParams();
   const [filteredTutors, setFilteredTutors] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch('http://localhost:3000/tutorials')
@@ -30,7 +31,7 @@ const FindTutorsByCategory = () => {
               <p className="text-gray-700">Price: ${t.price}</p>
               <p className="text-sm text-gray-600">Review: {t.review || 0}</p>
               <button
-                onClick={() => alert('Redirect to details or booking page')}
+                onClick={() => navigate(`/tutor/${t._id}`)}
                 className="mt-3 bg-blue-600 text-white px-4 py-2 rounded"
               >
                 View Details

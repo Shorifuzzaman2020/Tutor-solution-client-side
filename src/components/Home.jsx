@@ -1,8 +1,8 @@
 import React from 'react';
 import Stats from '../pages/Stats';
 import LanguageCategorySection from '../pages/LanguageCategorySection';
-
-
+import { FaHome, FaLaptop, FaBolt, FaUsers } from "react-icons/fa";
+import { FaPhoneAlt, FaRunning, FaShieldAlt, FaThumbsUp } from "react-icons/fa";
 const Home = () => {
     return (
         <div>
@@ -171,6 +171,132 @@ const Home = () => {
             <div>
                 <LanguageCategorySection></LanguageCategorySection>
             </div>
+            <section className="py-12 px-4">
+                <h2 className="text-4xl font-bold text-center mb-12">
+                    Tutoring <span className="text-green-500">Method</span>
+                </h2>
+
+                <div className="relative max-w-6xl mx-auto grid grid-cols-3 gap-8 items-center">
+                    {/* Top Left: Home Tutoring */}
+                    <div className="text-center">
+                        <div className="inline-block p-4 bg-green-100 rounded-full mb-2">
+                            <FaHome className="text-green-500 text-2xl" />
+                        </div>
+                        <h3 className="font-semibold text-lg">Home Tutoring</h3>
+                        <p className="text-sm">Personalized learning at home</p>
+                    </div>
+
+                    {/* Center Image */}
+                    <div className="col-span-1 flex justify-center items-center relative top-36">
+                        <div className="rounded-full border-4 border-green-300 p-2 relative">
+                            <div className="rounded-full border-2 border-dashed border-gray-300 p-1">
+                                <img
+                                    src="https://images.pexels.com/photos/6238058/pexels-photo-6238058.jpeg?auto=compress&cs=tinysrgb&w=600"
+                                    alt="Tutoring Method"
+                                    className="w-64 h-64 object-cover rounded-full"
+                                />
+                            </div>
+                            {/* Optional Plus Icons */}
+                            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-green-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-sm font-bold">
+                                +
+                            </div>
+                            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 bg-green-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-sm font-bold">
+                                +
+                            </div>
+                            <div className="absolute top-1/2 left-0 transform -translate-y-1/2 -translate-x-1/2 bg-green-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-sm font-bold">
+                                +
+                            </div>
+                            <div className="absolute top-1/2 right-0 transform -translate-y-1/2 translate-x-1/2 bg-green-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-sm font-bold">
+                                +
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Top Right: Online Tutoring */}
+                    <div className="text-center">
+                        <div className="inline-block p-4 bg-green-100 rounded-full mb-2">
+                            <FaLaptop className="text-green-500 text-2xl" />
+                        </div>
+                        <h3 className="font-semibold text-lg">Online Tutoring</h3>
+                        <p className="text-sm">Flexible learning from anywhere</p>
+                    </div>
+
+                    {/* Bottom Left: Crash Program */}
+                    <div className="text-center mt-12">
+                        <div className="inline-block p-4 bg-green-100 rounded-full mb-2">
+                            <FaBolt className="text-green-500 text-2xl" />
+                        </div>
+                        <h3 className="font-semibold text-lg">Crash Program</h3>
+                        <p className="text-sm">Fast-track your exam prep</p>
+                    </div>
+
+                    {/* Spacer */}
+                    <div></div>
+
+                    {/* Bottom Right: Batch Tutoring */}
+                    <div className="text-center mt-12">
+                        <div className="inline-block p-4 bg-green-100 rounded-full mb-2">
+                            <FaUsers className="text-green-500 text-2xl" />
+                        </div>
+                        <h3 className="font-semibold text-lg">Batch Tutoring</h3>
+                        <p className="text-sm">Group learning, better results</p>
+                    </div>
+                </div>
+            </section>
+            <section className="py-16 px-4">
+                <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+                    {/* Left Content */}
+                    <div>
+                        <p className="text-green-600 font-semibold mb-2">--WHY CHOOSE US</p>
+                        <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                            We intend to expand <span className="text-green-500">Excellent</span> education.
+                        </h2>
+
+                        <div className="grid grid-cols-2 gap-6">
+                            {/* Card 1 */}
+                            <div className="bg-white shadow-md p-6 rounded-xl flex flex-col items-center text-center">
+                                <div className="bg-green-500 text-white p-3 rounded-full mb-3">
+                                    <FaPhoneAlt size={20} />
+                                </div>
+                                <h4 className="text-lg font-semibold">24/7 Live Support</h4>
+                            </div>
+
+                            {/* Card 2 */}
+                            <div className="bg-white shadow-md p-6 rounded-xl flex flex-col items-center text-center">
+                                <div className="bg-green-500 text-white p-3 rounded-full mb-3">
+                                    <FaRunning size={20} />
+                                </div>
+                                <h4 className="text-lg font-semibold">Fast Responsive</h4>
+                            </div>
+
+                            {/* Card 3 */}
+                            <div className="bg-white shadow-md p-6 rounded-xl flex flex-col items-center text-center">
+                                <div className="bg-green-500 text-white p-3 rounded-full mb-3">
+                                    <FaShieldAlt size={20} />
+                                </div>
+                                <h4 className="text-lg font-semibold">Safe Community</h4>
+                            </div>
+
+                            {/* Card 4 */}
+                            <div className="bg-white shadow-md p-6 rounded-xl flex flex-col items-center text-center">
+                                <div className="bg-green-500 text-white p-3 rounded-full mb-3">
+                                    <FaThumbsUp size={20} />
+                                </div>
+                                <h4 className="text-lg font-semibold">Better Than Others</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Right Image */}
+                    <div className="w-full flex justify-center items-center">
+                        <img
+                            src="https://i.ibb.co/LzBQf0CH/651ee555d2f39ddc14f6b834-customer-service-channels-types-team.png"
+                            alt="Support Team"
+                            className="rounded-xl mt-20 shadow-lg w-full max-w-md"
+                        />
+                    </div>
+                </div>
+            </section>
         </div>
     );
 };
