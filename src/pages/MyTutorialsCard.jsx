@@ -69,7 +69,7 @@ const MyTutorialsCard = ({ tutorial, onDelete }) => {
   return (
     <div className="bg-white shadow-lg rounded-lg overflow-hidden">
       <div className="p-4">
-        <img src={tutorial.image} alt="" />
+        <img className='w-full h-80' src={tutorial.image} alt="" />
         <p className="text-xl text-gray-800 font-bold mt-3">Posted by: {tutorial.userName}</p>
         <p className="text-sm text-gray-500 mt-2">
           <span className="font-semibold">Description:</span><br /> {tutorial.description}

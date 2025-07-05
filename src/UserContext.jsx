@@ -1,4 +1,5 @@
 
+
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase.init';
@@ -25,8 +26,10 @@ export const UserProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser && isLoggedIn) {
         setUser(currentUser);
+        setIsLoggedIn(true);
       } else {
         setUser(null);
+        setIsLoggedIn(false);
       }
       setLoading(false);
     });
@@ -42,5 +45,3 @@ export const UserProvider = ({ children }) => {
 };
 
 export const useUser = () => useContext(UserContext);
-
-

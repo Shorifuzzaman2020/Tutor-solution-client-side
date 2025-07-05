@@ -30,7 +30,7 @@ const MyTutorials = () => {
   }
 
   if (!isLoggedIn) {
-    return <Navigate to="/login" replace />;
+    return <Redirect to="/login" replace />;
   }
 
   return (

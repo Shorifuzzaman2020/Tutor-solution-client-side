@@ -7,9 +7,9 @@ import { RouterProvider } from 'react-router'
 import { UserProvider } from './UserContext.jsx'
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+  
     <UserProvider>
       <RouterProvider router={router} />
     </UserProvider>
-  </StrictMode>,
+  
 )
