@@ -15,12 +15,14 @@ import TutorDetails from "../pages/TutorDetails";
 import LanguageCategorySection from "../pages/LanguageCategorySection";
 import FindTutorsByCategory from "../pages/FindTutorsByCategory";
 import ProtectedRoute from "../pages/ProtectedRoute";
+import ErrorPage from "../pages/ErrorPage";
 
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
