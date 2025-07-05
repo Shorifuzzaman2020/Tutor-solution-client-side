@@ -29,7 +29,7 @@ const Login = () => {
       
       await saveUserToDatabase(user);
 
-      navigate("/my-recipes");
+      navigate("/my-tutorials");
     } catch (err) {
       setError("Invalid email or password.");
     }
@@ -45,7 +45,7 @@ const Login = () => {
       
       await saveUserToDatabase(user);
 
-      navigate("/my-recipes");
+      navigate("/my-tutorials");
     } catch (err) {
       setError("Google login failed.");
     }

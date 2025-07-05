@@ -13,9 +13,7 @@ const Footer = () => {
           <div>
             <h3 className="text-2xl font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-4">
-              <li>
-                <Link to="/" className="text-lg text-gray-300 hover:text-white transition duration-300">Home</Link>
-              </li>
+              
               <li>
                 <Link to="/find-tutors" className="text-lg text-gray-300 hover:text-white transition duration-300">Find Tutors</Link>
               </li>
@@ -50,29 +48,23 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Stats Section */}
+          {/* Contact */}
           <div>
-            <h3 className="text-2xl font-semibold mb-4">Our Stats</h3>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="text-lg text-gray-300">Tutors: <span className="text-white font-semibold">1000+</span></div>
-              <div className="text-lg text-gray-300">Reviews: <span className="text-white font-semibold">5000+</span></div>
-              <div className="text-lg text-gray-300">Languages: <span className="text-white font-semibold">25</span></div>
-              <div className="text-lg text-gray-300">Users: <span className="text-white font-semibold">5000+</span></div>
+            <h3 className="text-2xl font-semibold mb-4">Contact Us</h3>
+            <div className="grid grid-cols-1 gap-4">
+              <div className="text-lg text-gray-300">Phone: <span className="text-white font-semibold">019963863333</span></div>
+              <div className="text-lg text-gray-300">email: <span className="text-white font-semibold">tutorsolution22@gmail.com</span></div>
+              
             </div>
           </div>
 
-          {/* Language Categories */}
+          {/* Address*/}
           <div>
-            <h3 className="text-2xl font-semibold mb-4">Explore Categories</h3>
+            <h3 className="text-2xl font-semibold mb-4">Our Address</h3>
             <ul className="space-y-4">
-              {["English", "Math", "Science", "History", "Art", "Programming", "Music", "Spanish", "French"].map((category, index) => (
-                <li key={index} className="flex justify-between items-center group">
-                  <div className="text-lg text-gray-300">{category}</div>
-                  <Link to={`/find-tutors/${category.toLowerCase()}`} className="text-blue-500 group-hover:text-blue-700 transition duration-300">
-                    <FiArrowRight className="text-xl" />
-                  </Link>
-                </li>
-              ))}
+              <li>Department of Immigration and Passports,</li>
+              <li>7-E, Agargaon,</li>
+              <li>Dhaka 1207, Bangladesh</li>
             </ul>
           </div>
         </div>

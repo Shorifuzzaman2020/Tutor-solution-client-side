@@ -48,7 +48,11 @@ const router = createBrowserRouter([
       },
       {
         path: 'my-booked-tutors',
-        element: <MyBookedTutors />,
+        element: (
+          <ProtectedRoute>
+            <MyBookedTutors />
+          </ProtectedRoute>
+        )
       },
       {
         path: 'login',

@@ -1,11 +1,16 @@
 
-
+import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '../UserContext';
 
 const AllTutorials = ({ tutorial }) => {
   const navigate = useNavigate();
-
+  const { isLoggedIn } = useUser();
   const handleViewDetails = () => {
+    if (!isLoggedIn) {
+            Swal.fire('Error', 'You must be logged in to See Details.', 'error');
+            return;
+        }
     navigate(`/tutor/${tutorial._id}`);
   };
 
