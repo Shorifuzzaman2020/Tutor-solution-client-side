@@ -49,7 +49,7 @@ const MyBookedTutors = () => {
               <img src={tutor.image} alt="Tutor" className="rounded w-full h-48 object-cover" />
               <h3 className="text-xl mt-2 font-bold">{tutor.language}</h3>
               <p className="text-gray-600">Price: ${tutor.price}</p>
-              <p className="text-sm text-gray-500 mt-1">Tutor Email: {tutor.tutorEmail}</p>
+              <p className="text-sm text-gray-500 mt-1">Tutor Email: {tutor.email}</p>
               <button
                 onClick={() => handleReview(tutor.tutorId)}
                 className="mt-3 btn btn-primary"

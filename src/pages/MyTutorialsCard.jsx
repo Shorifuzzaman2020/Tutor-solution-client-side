@@ -70,19 +70,19 @@ const MyTutorialsCard = ({ tutorial, onDelete }) => {
     <div className="bg-white shadow-lg rounded-lg overflow-hidden">
       <div className="p-4">
         <img src={tutorial.image} alt="" />
-        <p className="text-sm text-gray-600">Posted by: {tutorial.userName}</p>
+        <p className="text-xl text-gray-800 font-bold mt-3">Posted by: {tutorial.userName}</p>
         <p className="text-sm text-gray-500 mt-2">
           <span className="font-semibold">Description:</span><br /> {tutorial.description}
         </p>
         {tutorial.language && (
-          <p className="text-sm text-gray-500 mt-2">
-            <span className="font-semibold">Language:</span> {tutorial.language}
+          <p className="font-bold text-xl text-gray-500 mt-2 mb-3">
+            <span className="">Language:</span> {tutorial.language}
           </p>
         )}
-        <p>Price: {tutorial.price} $</p>
+        <p className='font-bold text-xl'>Price: {tutorial.price} $</p>
         <div className="mt-3 mb-5">
-          <span className="px-3 py-1 rounded-full text-2xl flex items-center">
-            {tutorial.review || 0} <CiStar></CiStar>
+          <span className=" py-1 rounded-full text-2xl flex items-center">
+            {tutorial.review || 0} Review
           </span>
         </div>
 

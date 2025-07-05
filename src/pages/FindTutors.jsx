@@ -36,24 +36,24 @@ const FindTutors = () => {
   return (
     <div className='w-11/12 mx-auto grid grid-cols-1 gap-3'>
       <div>
-        <h1 className='text-3xl font-bold text-center'>
+        <h1 className='text-3xl font-bold text-center my-5'>
           Explore Online Tutors and teachers for learning a new language
         </h1>
       </div>
       
-      {/* 🔍 Search Box */}
+      {/* Search Box */}
       <div className='relative w-full'>
         <input
-          className='w-full p-3 pr-10 border border-gray-300 rounded-md'
+          className='w-full p-3 pr-10 border rounded-md'
           type='text'
           placeholder='Search by language'
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <FaSearch className='absolute top-3.5 right-3 text-gray-500' />
+        <FaSearch className='absolute top-3.5 right-3 ' />
       </div>
 
-      {/* 🧑‍🏫 Display Filtered Tutorials */}
+      {/* Display Filtered Tutorials */}
       {filteredTutorials.length === 0 ? (
         <p className="text-center text-gray-500 mt-4">No tutors found for this language.</p>
       ) : (
