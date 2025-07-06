@@ -12,7 +12,9 @@ const TutorDetails = () => {
     const { user } = useUser();
 
     useEffect(() => {
-        fetch(`https://tutor-book-server-site.vercel.app/tutorials/${id}`)
+        fetch(`https://tutor-book-server-site.vercel.app/tutorials/${id}`,{
+            credentials: 'include'
+        })
             .then(res => res.json())
             .then(data => {
                 setTutorial(data);
@@ -40,6 +42,7 @@ const TutorDetails = () => {
         };
 
         fetch('https://tutor-book-server-site.vercel.app/bookings', {
+            credentials: 'include',
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(bookingData)
