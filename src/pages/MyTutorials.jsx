@@ -11,9 +11,7 @@ const MyTutorials = () => {
 
   useEffect(() => {
     if (user && isLoggedIn) {
-      fetch(`https://tutor-book-server-site.vercel.app/tutorials`, {
-        credentials: 'include'
-      })
+      fetch(`https://tutor-book-server-site.vercel.app/tutorials`)
         .then((res) => res.json())
         .then((data) => {
           const userTutorials = data.filter((tutorial) => tutorial.userId === user.uid);

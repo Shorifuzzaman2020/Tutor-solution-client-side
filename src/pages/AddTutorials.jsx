@@ -9,10 +9,7 @@ const AddTutorials = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
 
-    // if (!user) {
-    //     navigate("/login");
-    //     return null;
-    // }
+    
     
     const handleAddTutorials = async (e) => {
         e.preventDefault();

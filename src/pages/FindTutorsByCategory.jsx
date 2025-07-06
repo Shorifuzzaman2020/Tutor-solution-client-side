@@ -7,9 +7,7 @@ const FindTutorsByCategory = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('https://tutor-book-server-site.vercel.app/tutorials',{
-      credentials: 'include'
-    })
+    fetch('https://tutor-book-server-site.vercel.app/tutorials')
       .then(res => res.json())
       .then(data => {
         const filtered = data.filter(t => t.language?.toLowerCase() === category.toLowerCase());

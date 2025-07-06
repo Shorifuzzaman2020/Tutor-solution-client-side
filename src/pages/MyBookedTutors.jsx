@@ -6,55 +6,22 @@ const MyBookedTutors = () => {
   const { user } = useUser();
   const [bookedTutors, setBookedTutors] = useState([]);
 
-  // useEffect(() => {
-  //   if (user?.email) {
-  //     fetch(`https://tutor-book-server-site.vercel.app/bookings?email=${user.email}`,{
-  //       credentials: 'include'
-  //     })
-  //       .then(res => res.json())
-  //       .then(data => setBookedTutors(data))
-  //       .catch(err => {
-  //         console.error('Fetch error:', err);
-  //         Swal.fire('Error', 'Failed to fetch booked tutors', 'error');
-  //       });
-  //   }
-  // }, [user]);
-
   useEffect(() => {
     if (user?.email) {
-      fetch(`https://tutor-book-server-site.vercel.app/bookings?email=${user.email}`, {
-        credentials: 'include'
-      })
-        .then(res => {
-          if (!res.ok) {
-            throw new Error('Unauthorized or invalid token');
-          }
-          return res.json();
-        })
-        .then(data => {
-          if (Array.isArray(data)) {
-            setBookedTutors(data);
-          } else {
-            throw new Error('Unexpected response format');
-          }
-        })
+      fetch(`https://tutor-book-server-site.vercel.app/bookings?email=${user.email}`)
+        .then(res => res.json())
+        .then(data => setBookedTutors(data))
         .catch(err => {
           console.error('Fetch error:', err);
-          Swal.fire('Error', err.message || 'Failed to fetch booked tutors', 'error');
+          Swal.fire('Error', 'Failed to fetch booked tutors', 'error');
         });
     }
   }, [user]);
 
   const handleReview = (tutorId) => {
-    // fetch(`https://tutor-book-server-site.vercel.app/tutorials/${tutorId}/review`, {
-    //   credentials: 'include',
-    //   method: 'PUT',
-    //   headers: { 'Content-Type': 'application/json' },
-    // })
-    fetch(`https://tutor-book-server-site.vercel.app/tutorials/${tutorId}/review?email=${user.email}`, {
-      credentials: 'include', // ✅ must include for cookie to be sent
+    fetch(`https://tutor-book-server-site.vercel.app/tutorials/${tutorId}/review`, {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' }
+      headers: { 'Content-Type': 'application/json' },
     })
       .then(res => res.json())
       .then(data => {
