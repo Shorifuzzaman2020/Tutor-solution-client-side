@@ -17,7 +17,7 @@ const MyTutorialsCard = ({ tutorial, onDelete }) => {
         ReviewCount: (tutorial.review || 0) + 1,
       };
 
-      fetch(`http://localhost:3000/tutorials/${tutorial._id}`, {
+      fetch(`https://tutor-book-server-site.vercel.app/tutorials/${tutorial._id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ReviewCount: updatedTutorial.ReviewCount }),
@@ -43,7 +43,7 @@ const MyTutorialsCard = ({ tutorial, onDelete }) => {
       confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/tutorials/${tutorial._id}`, {
+        fetch(`https://tutor-book-server-site.vercel.app/tutorials/${tutorial._id}`, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',

@@ -35,7 +35,7 @@ const AddTutorials = () => {
         setLoading(true);
 
         try {
-            const response = await fetch("http://localhost:3000/tutorials", {
+            const response = await fetch("https://tutor-book-server-site.vercel.app/tutorials", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(newTutorial),

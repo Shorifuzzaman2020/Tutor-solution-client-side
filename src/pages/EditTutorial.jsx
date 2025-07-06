@@ -13,7 +13,7 @@ const EditTutorial = () => {
     useEffect(() => {
         if (!user || !user.uid) return;
 
-        fetch(`http://localhost:3000/tutorials/${id}`)
+        fetch(`https://tutor-book-server-site.vercel.app/tutorials/${id}`)
             .then(res => {
                 if (!res.ok) throw new Error("Failed to fetch tutorial");
                 return res.json();
@@ -51,7 +51,7 @@ const EditTutorial = () => {
         setLoading(true);
 
         try {
-            const response = await fetch(`http://localhost:3000/tutorials/update/${id}`, {
+            const response = await fetch(`https://tutor-book-server-site.vercel.app/tutorials/update/${id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(updatedTutorial),

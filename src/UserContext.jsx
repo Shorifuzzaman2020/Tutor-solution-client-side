@@ -30,7 +30,7 @@ export const UserProvider = ({ children }) => {
         setIsLoggedIn(true);
         if(currentUser?.email){
           const userData = {email: currentUser.email}
-          axios.post('http://localhost:3000/jwt',userData,{
+          axios.post('https://tutor-book-server-site.vercel.app/jwt',userData,{
             withCredentials: true
           })
           .then(res => {

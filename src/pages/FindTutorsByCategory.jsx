@@ -7,7 +7,7 @@ const FindTutorsByCategory = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:3000/tutorials',{
+    fetch('https://tutor-book-server-site.vercel.app/tutorials',{
       credentials: 'include'
     })
       .then(res => res.json())

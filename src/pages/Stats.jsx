@@ -12,10 +12,10 @@ const Stats = () => {
     // Fetch both stats endpoints
     const fetchStats = async () => {
       try {
-        const tutorRes = await fetch('http://localhost:3000/stats/tutorials');
+        const tutorRes = await fetch('https://tutor-book-server-site.vercel.app/stats/tutorials');
         const tutorData = await tutorRes.json();
 
-        const userRes = await fetch('http://localhost:3000/stats/users');
+        const userRes = await fetch('https://tutor-book-server-site.vercel.app/stats/users');
         const userData = await userRes.json();
 
         setStats({

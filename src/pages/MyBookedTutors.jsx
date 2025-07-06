@@ -8,7 +8,7 @@ const MyBookedTutors = () => {
 
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:3000/bookings?email=${user.email}`,{
+      fetch(`https://tutor-book-server-site.vercel.app/bookings?email=${user.email}`,{
         credentials: 'include'
       })
         .then(res => res.json())
@@ -21,7 +21,7 @@ const MyBookedTutors = () => {
   }, [user]);
 
   const handleReview = (tutorId) => {
-    fetch(`http://localhost:3000/tutorials/${tutorId}/review`, {
+    fetch(`https://tutor-book-server-site.vercel.app/tutorials/${tutorId}/review`, {
       credentials: 'include',
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },

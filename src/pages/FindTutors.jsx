@@ -11,9 +11,7 @@ const FindTutors = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    fetch('http://localhost:3000/tutorials',{
-      credentials: 'include'
-    })
+    fetch('https://tutor-book-server-site.vercel.app/tutorials')
       .then((res) => res.json())
       .then((data) => {
         // console.log('Fetched tutorials:', data);

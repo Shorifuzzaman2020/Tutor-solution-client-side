@@ -12,7 +12,7 @@ const TutorDetails = () => {
     const { user } = useUser();
 
     useEffect(() => {
-        fetch(`http://localhost:3000/tutorials/${id}`)
+        fetch(`https://tutor-book-server-site.vercel.app/tutorials/${id}`)
             .then(res => res.json())
             .then(data => {
                 setTutorial(data);
@@ -39,7 +39,7 @@ const TutorDetails = () => {
             email: user.email
         };
 
-        fetch('http://localhost:3000/bookings', {
+        fetch('https://tutor-book-server-site.vercel.app/bookings', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(bookingData)
