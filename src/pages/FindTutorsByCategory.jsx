@@ -7,7 +7,9 @@ const FindTutorsByCategory = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:3000/tutorials')
+    fetch('http://localhost:3000/tutorials',{
+      credentials: 'include'
+    })
       .then(res => res.json())
       .then(data => {
         const filtered = data.filter(t => t.language?.toLowerCase() === category.toLowerCase());

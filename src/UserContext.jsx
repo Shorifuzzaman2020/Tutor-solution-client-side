@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase.init';
+import axios from 'axios';
 
 const UserContext = createContext();
 
@@ -27,6 +28,17 @@ export const UserProvider = ({ children }) => {
       if (currentUser && isLoggedIn) {
         setUser(currentUser);
         setIsLoggedIn(true);
+        if(currentUser?.email){
+          const userData = {email: currentUser.email}
+          axios.post('http://localhost:3000/jwt',userData,{
+            withCredentials: true
+          })
+          .then(res => {
+            console.log(res.data)
+          })
+          .catch(error => console.log(error));
+          
+        }
       } else {
         setUser(null);
         setIsLoggedIn(false);

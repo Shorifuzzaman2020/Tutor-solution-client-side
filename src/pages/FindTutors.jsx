@@ -11,10 +11,12 @@ const FindTutors = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    fetch('http://localhost:3000/tutorials')
+    fetch('http://localhost:3000/tutorials',{
+      credentials: 'include'
+    })
       .then((res) => res.json())
       .then((data) => {
-        console.log('Fetched tutorials:', data);
+        // console.log('Fetched tutorials:', data);
         setTutorials(data);
         setLoading(false);
       })
