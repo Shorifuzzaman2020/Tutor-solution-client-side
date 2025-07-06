@@ -46,10 +46,15 @@ const MyBookedTutors = () => {
   }, [user]);
 
   const handleReview = (tutorId) => {
-    fetch(`https://tutor-book-server-site.vercel.app/tutorials/${tutorId}/review`, {
-      credentials: 'include',
+    // fetch(`https://tutor-book-server-site.vercel.app/tutorials/${tutorId}/review`, {
+    //   credentials: 'include',
+    //   method: 'PUT',
+    //   headers: { 'Content-Type': 'application/json' },
+    // })
+    fetch(`https://tutor-book-server-site.vercel.app/tutorials/${tutorId}/review?email=${user.email}`, {
+      credentials: 'include', // ✅ must include for cookie to be sent
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json' }
     })
       .then(res => res.json())
       .then(data => {
