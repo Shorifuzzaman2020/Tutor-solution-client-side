@@ -6,16 +6,41 @@ const MyBookedTutors = () => {
   const { user } = useUser();
   const [bookedTutors, setBookedTutors] = useState([]);
 
+  // useEffect(() => {
+  //   if (user?.email) {
+  //     fetch(`https://tutor-book-server-site.vercel.app/bookings?email=${user.email}`,{
+  //       credentials: 'include'
+  //     })
+  //       .then(res => res.json())
+  //       .then(data => setBookedTutors(data))
+  //       .catch(err => {
+  //         console.error('Fetch error:', err);
+  //         Swal.fire('Error', 'Failed to fetch booked tutors', 'error');
+  //       });
+  //   }
+  // }, [user]);
+
   useEffect(() => {
     if (user?.email) {
-      fetch(`https://tutor-book-server-site.vercel.app/bookings?email=${user.email}`,{
+      fetch(`https://tutor-book-server-site.vercel.app/bookings?email=${user.email}`, {
         credentials: 'include'
       })
-        .then(res => res.json())
-        .then(data => setBookedTutors(data))
+        .then(res => {
+          if (!res.ok) {
+            throw new Error('Unauthorized or invalid token');
+          }
+          return res.json();
+        })
+        .then(data => {
+          if (Array.isArray(data)) {
+            setBookedTutors(data);
+          } else {
+            throw new Error('Unexpected response format');
+          }
+        })
         .catch(err => {
           console.error('Fetch error:', err);
-          Swal.fire('Error', 'Failed to fetch booked tutors', 'error');
+          Swal.fire('Error', err.message || 'Failed to fetch booked tutors', 'error');
         });
     }
   }, [user]);
