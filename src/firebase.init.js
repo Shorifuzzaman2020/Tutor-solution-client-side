@@ -5,12 +5,12 @@ import { getStorage } from 'firebase/storage';
 
 // Your Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAk5pP--zVp2WqzuU6nlzSS8GrKT3hxRfk",
-  authDomain: "event-discovery-project.firebaseapp.com",
-  projectId: "event-discovery-project",
-  storageBucket: "event-discovery-project.firebasestorage.app",
-  messagingSenderId: "931228422736",
-  appId: "1:931228422736:web:82f613e41b9485bd657755",
+  apiKey: "AIzaSyAIEEXwe-5kfFZ5xtVM_fzi8nP6HKEfmQ8",
+  authDomain: "fir-auth-5fe90.firebaseapp.com",
+  projectId: "fir-auth-5fe90",
+  storageBucket: "fir-auth-5fe90.firebasestorage.app",
+  messagingSenderId: "195863202100",
+  appId: "1:195863202100:web:2ef516f6f3acc828b4fd61"
 };
 
 // Initialize Firebase
