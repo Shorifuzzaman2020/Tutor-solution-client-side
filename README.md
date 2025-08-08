@@ -41,8 +41,8 @@ Tutor Solution is a responsive web platform that connects students with tutors. 
 ### Installation
 
 1. Clone the repository:  
-   git clone https://github.com/your-username/tutor-solution.git
-   cd tutor-solution
+   - git clone https://github.com/your-username/tutor-solution.git
+   - cd tutor-solution
 2. Install dependencies:
 - npm install
 
@@ -60,4 +60,4 @@ REACT_APP_MONGODB_URI=your_mongodb_connection_string
 6. Open your browser and navigate to http://localhost:3000
 
 ✔️✔️Live Project
-https://tutor-book-server-site.vercel.app
+https://fir-auth-5fe90.web.app/
