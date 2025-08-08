@@ -4,8 +4,8 @@
 Tutor Solution is a responsive web platform that connects students with tutors. It allows users to register, log in (including Google authentication), search for tutors, add and manage tutorials, and book tutoring sessions. The app features a clean UI with light/dark mode toggle, mobile-friendly navigation, and secure authentication powered by Firebase. User data is stored in MongoDB for personalized and persistent experiences.
 
 ## Screenshot
-![Tutor Solution Screenshot](./screenshot.png)  
-*Replace the above path with your actual screenshot file path.*
+![Tutor Solution Screenshot](https://i.ibb.co.com/ds4hHJ4t/Screenshot-2025-08-08-193132.jpg)  
+
 
 ## Technologies Used
 - **Frontend:** React, React Router, Tailwind CSS, React Icons  
