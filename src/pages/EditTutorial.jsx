@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -9,6 +10,10 @@ const EditTutorial = () => {
     const { user } = useUser();
     const [tutorial, setTutorial] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [uploading, setUploading] = useState(false);
+    const [imageURL, setImageURL] = useState("");
+
+    const imgbbAPIKey = "fc3b149af4e69041d72248d6085358e9"; // Replace with your key
 
     useEffect(() => {
         if (!user || !user.uid) return;
@@ -28,6 +33,7 @@ const EditTutorial = () => {
                 }
 
                 setTutorial(data);
+                setImageURL(data.image); // Keep current image
                 setLoading(false);
             })
             .catch(err => {
@@ -37,12 +43,55 @@ const EditTutorial = () => {
             });
     }, [id, user, navigate]);
 
+    // Handle image upload to ImgBB
+    const handleImageUpload = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        setUploading(true);
+
+        const formData = new FormData();
+        formData.append("image", file);
+
+        try {
+            const res = await fetch(
+                `https://api.imgbb.com/1/upload?key=${imgbbAPIKey}`,
+                {
+                    method: "POST",
+                    body: formData,
+                }
+            );
+            const data = await res.json();
+            if (data.success) {
+                setImageURL(data.data.url);
+                Swal.fire("Uploaded!", "Image uploaded successfully!", "success");
+            } else {
+                Swal.fire("Error!", "Image upload failed!", "error");
+            }
+        } catch (err) {
+            console.error("Upload error:", err);
+            Swal.fire("Error!", "Image upload error!", "error");
+        }
+
+        setUploading(false);
+    };
+
     const handleUpdate = async (e) => {
         e.preventDefault();
+
+        // Prevent submit if image isn't uploaded yet
+        if (!imageURL) {
+            Swal.fire({
+                icon: "warning",
+                title: "Please upload an image first.",
+            });
+            return;
+        }
+
         const form = e.target;
 
         const updatedTutorial = {
-            image: form.image.value,
+            image: imageURL,
             language: form.language.value,
             price: parseFloat(form.price.value),
             description: form.description.value
@@ -98,17 +147,6 @@ const EditTutorial = () => {
                 </div>
 
                 <div>
-                    <label className="block mb-1 font-medium">Image URL</label>
-                    <input
-                        type="text"
-                        name="image"
-                        defaultValue={tutorial.image}
-                        className="w-full border px-3 py-2 rounded"
-                        required
-                    />
-                </div>
-
-                <div>
                     <label className="block mb-1 font-medium">Language</label>
                     <input
                         type="text"
@@ -149,6 +187,18 @@ const EditTutorial = () => {
                         rows="3"
                         disabled
                     />
+                </div>
+
+                <div>
+                    <label className="block mb-1 font-medium">Tutorial Image</label>
+                    <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageUpload}
+                        className="w-full border px-3 py-2 rounded"
+                    />
+                    {uploading && <p className="text-blue-500 text-sm mt-1">Uploading image...</p>}
+                    {imageURL && <img src={imageURL} alt="Tutorial" className="mt-2 w-32 rounded" />}
                 </div>
 
                 <div>
