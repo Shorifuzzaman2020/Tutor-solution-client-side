@@ -15,7 +15,7 @@ const AllTutorials = ({ tutorial }) => {
   };
 
   return (
-    <div className="card card-side bg-base-200 gap-6 p-4 border-2 shadow-sm flex flex-col md:flex-row">
+    <div className="card card-side bg-base-200 gap-6 p-4 border-2 shadow-sm flex flex-col md:flex-row mb-4">
       <figure className="w-full md:w-1/3">
         <img src={tutorial.image} alt="Tutorial" className="w-80 h-80 object-cover rounded" />
       </figure>
