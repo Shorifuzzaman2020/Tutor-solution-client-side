@@ -8,26 +8,73 @@ const AddTutorials = () => {
     const { user } = useUser();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
+    const [uploading, setUploading] = useState(false);
+    const [formData, setFormData] = useState({
+        image: "",
+    });
 
-    
-    
+    const imgbbAPIKey = "fc3b149af4e69041d72248d6085358e9"; 
+
+    // Handle image upload to ImgBB
+    const handleImageUpload = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        setUploading(true);
+
+        const form = new FormData();
+        form.append("image", file);
+
+        try {
+            const res = await fetch(
+                `https://api.imgbb.com/1/upload?key=${imgbbAPIKey}`,
+                {
+                    method: "POST",
+                    body: form,
+                }
+            );
+            const data = await res.json();
+            if (data.success) {
+                setFormData((prev) => ({
+                    ...prev,
+                    image: data.data.url,
+                }));
+                Swal.fire("Uploaded!", "Image uploaded successfully!", "success");
+            } else {
+                Swal.fire("Error!", "Image upload failed!", "error");
+            }
+        } catch (err) {
+            console.error("Upload error:", err);
+            Swal.fire("Error!", "Image upload error!", "error");
+        }
+
+        setUploading(false);
+    };
+
     const handleAddTutorials = async (e) => {
         e.preventDefault();
-        const form = e.target;
-        const formData = new FormData(form);
 
+        // Prevent submit if image is not uploaded
+        if (!formData.image) {
+            Swal.fire({
+                icon: "warning",
+                title: "Please upload the tutorial image first.",
+            });
+            return;
+        }
+
+        const form = e.target;
         const newTutorial = {
             userId: user.uid,
             userName: user.displayName,
             email: user.email,
-            image: formData.get("image"),
-            language: formData.get("language"),
-            price: parseFloat(formData.get("price")),
-            description: formData.get("description"),
+            image: formData.image,
+            language: form.language.value,
+            price: parseFloat(form.price.value),
+            description: form.description.value,
             review: 0,
             createdAt: new Date().toISOString(),
         };
-
 
         setLoading(true);
 
@@ -38,9 +85,7 @@ const AddTutorials = () => {
                 body: JSON.stringify(newTutorial),
             });
 
-            if (!response.ok) {
-                throw new Error("Failed to add tutorial");
-            }
+            if (!response.ok) throw new Error("Failed to add tutorial");
 
             const data = await response.json();
             if (data.insertedId) {
@@ -50,6 +95,7 @@ const AddTutorials = () => {
                     confirmButtonColor: "#22c55e",
                 });
                 form.reset();
+                setFormData({ image: "" });
                 navigate("/my-tutorials");
             } else {
                 throw new Error("Tutorial not saved properly");
@@ -65,6 +111,7 @@ const AddTutorials = () => {
             setLoading(false);
         }
     };
+
     if (loading || !user) {
         return <div className="text-center mt-10">Loading...</div>;
     }
@@ -90,17 +137,6 @@ const AddTutorials = () => {
                         value={user.email}
                         disabled
                         className="w-full border px-3 py-2 rounded bg-gray-100"
-                    />
-                </div>
-
-                <div>
-                    <label className="block mb-1 font-medium">Image URL</label>
-                    <input
-                        type="text"
-                        name="image"
-                        className="w-full border px-3 py-2 rounded"
-                        placeholder="Enter image URL"
-                        required
                     />
                 </div>
 
@@ -136,6 +172,19 @@ const AddTutorials = () => {
                         placeholder="Write a short description..."
                         required
                     ></textarea>
+                </div>
+                <div>
+                    <label className="block mb-1 font-medium">Tutorial Image</label>
+                    <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageUpload}
+                        className="w-full border px-3 py-2 rounded"
+                    />
+                    {uploading && <p className="text-blue-500 text-sm mt-1">Uploading image...</p>}
+                    {formData.image && (
+                        <img src={formData.image} alt="Uploaded" className="mt-2 w-32 rounded" />
+                    )}
                 </div>
 
                 <div>
