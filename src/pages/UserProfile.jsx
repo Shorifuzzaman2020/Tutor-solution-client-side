@@ -1,4 +1,5 @@
 
+
 import React, { useEffect, useState } from "react";
 import {
     FaMapMarkerAlt,
@@ -11,8 +12,10 @@ import {
     FaTrash,
 } from "react-icons/fa";
 import { useUser } from "../UserContext";
+import Swal from "sweetalert2";
 
 const API_BASE = "https://tutor-book-server-site.vercel.app";
+const imgbbAPIKey = "fc3b149af4e69041d72248d6085358e9"; 
 
 const emptyEducation = () => ({ degree: "", school: "", year: "" });
 const emptyExperience = () => ({ role: "", company: "", duration: "", description: "" });
@@ -52,12 +55,10 @@ export default function UserProfileWithSeparateCollections() {
                 setLoading(true);
                 
                 // Fetch all profile data in parallel
-                const [profileRes, educationRes, experienceRes, avatarRes, bannerRes] = await Promise.all([
+                const [profileRes, educationRes, experienceRes] = await Promise.all([
                     fetch(`${API_BASE}/profile/${user.uid}`),
                     fetch(`${API_BASE}/education/${user.uid}`),
-                    fetch(`${API_BASE}/experience/${user.uid}`),
-                    fetch(`${API_BASE}/avatar/${user.uid}`),
-                    fetch(`${API_BASE}/banner/${user.uid}`)
+                    fetch(`${API_BASE}/experience/${user.uid}`)
                 ]);
 
                 // Handle profile data
@@ -71,6 +72,8 @@ export default function UserProfileWithSeparateCollections() {
                         bio: profileData.bio || "",
                         skills: profileData.skills || [],
                     });
+                    setAvatar(profileData.avatar || user.photoURL || "https://i.pravatar.cc/150?img=15");
+                    setBanner(profileData.banner || "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1400&q=80");
                 }
 
                 // Handle education
@@ -83,18 +86,6 @@ export default function UserProfileWithSeparateCollections() {
                 if (experienceRes.ok) {
                     const experienceData = await experienceRes.json();
                     setExperience(experienceData || []);
-                }
-
-                // Handle avatar
-                if (avatarRes.ok) {
-                    const avatarData = await avatarRes.json();
-                    setAvatar(avatarData.url || user.photoURL || "https://i.pravatar.cc/150?img=15");
-                }
-
-                // Handle banner
-                if (bannerRes.ok) {
-                    const bannerData = await bannerRes.json();
-                    setBanner(bannerData.url || "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1400&q=80");
                 }
 
             } catch (err) {
@@ -144,27 +135,29 @@ export default function UserProfileWithSeparateCollections() {
         }
     };
 
-    const uploadImage = async (file, type) => {
+    const uploadImageToImgBB = async (file) => {
         if (!file) return null;
+
+        setUploadingImage(true);
         const formData = new FormData();
         formData.append("image", file);
-        setUploadingImage(true);
 
         try {
-            const res = await fetch(`${API_BASE}/${type}/${user.uid}`, {
-                method: "POST",
-                body: formData,
-            });
-
-            if (!res.ok) {
-                const err = await res.json();
-                throw new Error(err.error || "Upload failed");
-            }
-
+            const res = await fetch(
+                `https://api.imgbb.com/1/upload?key=${imgbbAPIKey}`,
+                {
+                    method: "POST",
+                    body: formData,
+                }
+            );
             const data = await res.json();
-            return data.url;
+            if (data.success) {
+                return data.data.url;
+            } else {
+                throw new Error("Image upload failed");
+            }
         } catch (err) {
-            console.error("uploadImage error:", err);
+            console.error("Upload error:", err);
             setError("Image upload failed");
             return null;
         } finally {
@@ -177,20 +170,40 @@ export default function UserProfileWithSeparateCollections() {
         if (!file) return;
 
         // Set preview
+        const previewUrl = URL.createObjectURL(file);
         if (type === 'avatar') {
-            setAvatarFile(URL.createObjectURL(file));
+            setAvatarFile(previewUrl);
         } else {
-            setBannerFile(URL.createObjectURL(file));
+            setBannerFile(previewUrl);
         }
 
-        // Upload and update state
-        const uploadedUrl = await uploadImage(file, type);
-        if (uploadedUrl) {
+        // Upload to ImgBB
+        const uploadedUrl = await uploadImageToImgBB(file);
+        if (!uploadedUrl) return;
+
+        try {
+            // Save the URL to the backend
+            const res = await fetch(`${API_BASE}/profile/${user.uid}/${type}`, {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ [`${type}Url`]: uploadedUrl }),
+            });
+
+            if (!res.ok) {
+                throw new Error("Failed to save image URL");
+            }
+
+            // Update state
             if (type === 'avatar') {
                 setAvatar(uploadedUrl);
+                Swal.fire("Success!", "Profile picture updated successfully!", "success");
             } else {
                 setBanner(uploadedUrl);
+                Swal.fire("Success!", "Cover photo updated successfully!", "success");
             }
+        } catch (err) {
+            console.error("Error saving image URL:", err);
+            Swal.fire("Error!", "Failed to save image URL", "error");
         }
     };
 
@@ -409,6 +422,7 @@ export default function UserProfileWithSeparateCollections() {
                         className="hidden"
                     />
                     <FaUpload /> Change Cover
+                    {uploadingImage && <span className="ml-2">Uploading...</span>}
                 </label>
             </div>
 
@@ -503,8 +517,27 @@ export default function UserProfileWithSeparateCollections() {
                     </p>
 
                     {/* Email */}
-                    <p className="flex items-center text-gray-600 mt-1 gap-2">
-                        <FaEnvelope /> {profile.email || "Email not provided"}
+                    <p className="flex items-center text-gray-600 mt-2 gap-2">
+                        <FaMapMarkerAlt />
+                        {editing === "email" ? (
+                            <>
+                                <input
+                                    value={tempValue}
+                                    onChange={(e) => setTempValue(e.target.value)}
+                                    className="border px-2 py-1 rounded"
+                                />
+                                <button onClick={saveEdit} className="text-green-600"><FaCheck /></button>
+                                <button onClick={cancelEdit} className="text-red-600"><FaTimes /></button>
+                            </>
+                        ) : (
+                            <>
+                                {profile.email || "Email not provided"}
+                                <FaEdit
+                                    className="ml-2 cursor-pointer text-indigo-600"
+                                    onClick={() => startEdit("email", profile.email)}
+                                />
+                            </>
+                        )}
                     </p>
                 </div>
 

@@ -54,24 +54,41 @@ const Navbar = ({ toggleTheme, theme }) => {
           >
             Find tutors
           </Link>
-          <Link
-            to="/add-tutorials"
-            className={`${isActive("/add-tutorials") ? "text-yellow-300 font-semibold" : "hover:underline"}`}
-          >
-            Add Tutorials
-          </Link>
-          <Link
-            to="/my-tutorials"
-            className={`${isActive("/my-tutorials") ? "text-yellow-300 font-semibold" : "hover:underline"}`}
-          >
-            My Tutorials
-          </Link>
-          <Link
-            to="/my-booked-tutors"
-            className={`${isActive("/my-booked-tutors") ? "text-yellow-300 font-semibold" : "hover:underline"}`}
-          >
-            My booked tutors
-          </Link>
+          <div>
+            <div className="flex justify-between items-center gap-4">
+              {user && (
+                <>
+                  <Link
+                    to="/add-tutorials"
+                    className={`${isActive("/add-tutorials") ? "text-yellow-300 font-semibold" : "hover:underline"}`}
+                  >
+                    Add Tutorials
+                  </Link>
+
+                  <Link
+                    to="/my-tutorials"
+                    className={`${isActive("/my-tutorials") ? "text-yellow-300 font-semibold" : "hover:underline"}`}
+                  >
+                    My Tutorials
+                  </Link>
+
+                  <Link
+                    to="/my-booked-tutors"
+                    className={`${isActive("/my-booked-tutors") ? "text-yellow-300 font-semibold" : "hover:underline"}`}
+                  >
+                    My booked tutors
+                  </Link>
+                  <Link
+                    to="/profile"
+                    className={`${isActive("/profile") ? "text-yellow-300 font-semibold" : "hover:underline"}`}
+                  >
+                    My Profile
+                  </Link>
+                </>
+              )}
+            </div>
+
+          </div>
         </div>
 
         {/* Desktop Auth */}
@@ -88,12 +105,15 @@ const Navbar = ({ toggleTheme, theme }) => {
                 </button>
 
               </div>
-              <img
-                src={user.photoURL || "https://www.gravatar.com/avatar/"}
-                alt={user.displayName}
-                className="w-10 h-10 rounded-full cursor-pointer"
-                title={user.displayName}
-              />
+              <div>
+                <img
+                  src={user.photoURL || "https://www.gravatar.com/avatar/"}
+                  alt={user.displayName}
+                  className="w-10 h-10 rounded-full cursor-pointer"
+                  title={user.displayName}
+                  onClick={() => navigate("/profile")}
+                />
+              </div>
               <button
                 onClick={handleLogout}
                 className="bg-red-500 text-white p-2 rounded hover:bg-red-700"
@@ -137,24 +157,38 @@ const Navbar = ({ toggleTheme, theme }) => {
               >
                 Find tutors
               </Link>
-              <Link
-                to="/add-tutorials"
-                className={`${isActive("/add-tutorials") ? "text-yellow-300 font-semibold" : "hover:underline"} block`}
-              >
-                Add Tutorials
-              </Link>
-              <Link
-                to="/my-tutorials"
-                className={`${isActive("/my-tutorials") ? "text-yellow-300 font-semibold" : "hover:underline"} block`}
-              >
-                My Tutorials
-              </Link>
-              <Link
-                to="/my-booked-tutors"
-                className={`${isActive("/my-booked-tutors") ? "text-yellow-300 font-semibold" : "hover:underline"} block`}
-              >
-                My booked tutors
-              </Link>
+              {user && (
+                <>
+                  <div className="space-y-4 flex flex-col">
+                    <Link
+                      to="/add-tutorials"
+                      className={`${isActive("/add-tutorials") ? "text-yellow-300 font-semibold" : "hover:underline"}`}
+                    >
+                      Add Tutorials
+                    </Link>
+
+                    <Link
+                      to="/my-tutorials"
+                      className={`${isActive("/my-tutorials") ? "text-yellow-300 font-semibold" : "hover:underline"}`}
+                    >
+                      My Tutorials
+                    </Link>
+
+                    <Link
+                      to="/my-booked-tutors"
+                      className={`${isActive("/my-booked-tutors") ? "text-yellow-300 font-semibold" : "hover:underline"}`}
+                    >
+                      My booked tutors
+                    </Link>
+                    <Link
+                      to="/profile"
+                      className={`${isActive("/profile") ? "text-yellow-300 font-semibold" : "hover:underline"}`}
+                    >
+                      My Profile
+                    </Link>
+                  </div>
+                </>
+              )}
               {user ? (
                 <button
                   onClick={handleLogout}

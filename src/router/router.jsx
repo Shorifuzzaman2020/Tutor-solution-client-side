@@ -18,6 +18,8 @@ import ProtectedRoute from "../pages/ProtectedRoute";
 import ErrorPage from "../pages/ErrorPage";
 import UserProfile from "../pages/UserProfile";
 import UserProfileEdit from "../pages/UserProfileEdit";
+import PublicProfile from "../pages/TutorProfileView";
+import TutorProfileView from "../pages/TutorProfileView";
 
 
 const router = createBrowserRouter([
@@ -93,6 +95,10 @@ const router = createBrowserRouter([
       {
         path: 'update-profile',
         element: <UserProfileEdit />,
+      },
+      {
+        path: 'see-profile/:userId',
+        element: <TutorProfileView />,
       },
     ]
   },

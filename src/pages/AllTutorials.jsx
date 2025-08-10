@@ -8,9 +8,9 @@ const AllTutorials = ({ tutorial }) => {
   const { isLoggedIn } = useUser();
   const handleViewDetails = () => {
     if (!isLoggedIn) {
-            Swal.fire('Error', 'You must be logged in to See Details.', 'error');
-            return;
-        }
+      Swal.fire('Error', 'You must be logged in to See Details.', 'error');
+      return;
+    }
     navigate(`/tutor/${tutorial._id}`);
   };
 
@@ -28,6 +28,13 @@ const AllTutorials = ({ tutorial }) => {
           <button onClick={handleViewDetails} className="btn btn-primary">
             View Details
           </button>
+          <button
+            onClick={() => navigate(`/see-profile/${tutorial.userId}`)}
+            className="btn btn-primary"
+          >
+            View Profile
+          </button>
+
         </div>
       </div>
     </div>
