@@ -176,7 +176,7 @@ const Home = () => {
                     Tutoring <span className="text-green-500">Method</span>
                 </h2>
 
-                <div className="relative max-w-6xl mx-auto grid grid-cols-3 gap-8 items-center">
+                <div className="relative max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
                     {/* Top Left: Home Tutoring */}
                     <div className="text-center">
                         <div className="inline-block p-4 bg-green-100 rounded-full mb-2">
@@ -186,8 +186,8 @@ const Home = () => {
                         <p className="text-sm">Personalized learning at home</p>
                     </div>
 
-                    {/* Center Image */}
-                    <div className="col-span-1 flex justify-center items-center relative top-36">
+                    {/* Center Image - Hidden on Mobile */}
+                    <div className="hidden md:flex col-span-1 justify-center items-center relative top-36">
                         <div className="rounded-full border-4 border-green-300 p-2 relative">
                             <div className="rounded-full border-2 border-dashed border-gray-300 p-1">
                                 <img
