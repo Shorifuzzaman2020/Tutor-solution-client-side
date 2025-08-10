@@ -16,6 +16,8 @@ import LanguageCategorySection from "../pages/LanguageCategorySection";
 import FindTutorsByCategory from "../pages/FindTutorsByCategory";
 import ProtectedRoute from "../pages/ProtectedRoute";
 import ErrorPage from "../pages/ErrorPage";
+import UserProfile from "../pages/UserProfile";
+import UserProfileEdit from "../pages/UserProfileEdit";
 
 
 const router = createBrowserRouter([
@@ -83,6 +85,14 @@ const router = createBrowserRouter([
       {
         path: 'find-tutors/:category',
         element: <FindTutorsByCategory />,
+      },
+      {
+        path: 'profile',
+        element: <UserProfile />,
+      },
+      {
+        path: 'update-profile',
+        element: <UserProfileEdit />,
       },
     ]
   },
